@@ -38,10 +38,9 @@ xmerged[,"subject"] <- smerged
 # subsettting and writing to txt file
 colstd<-xmerged[,grep('std',names(xmerged))]
 colmean<-xmerged[,grep('mean',names(xmerged))]
-colMean<-xmerged[,grep('Mean',names(xmerged))]
 activities<-xmerged[,grep('activity',names(xmerged))]
 subjects<-xmerged[,grep('subject',names(xmerged))]
-DFsub <- cbind(colmean, colMean, colstd, activities, subjects)
+DFsub <- cbind(colmean, colstd, activities, subjects)
 DFmelt <- melt(DFsub, id.vars=c("subjects", "activities"), value.name="value")
 SubActVarMean <- dcast(DFmelt, subjects+activities ~ variable, mean)
 write.table(SubActVarMean, "analysis.txt", row.name=FALSE, sep="\t")
